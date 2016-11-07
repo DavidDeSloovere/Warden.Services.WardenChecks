@@ -4,6 +4,7 @@ using Nancy.Bootstrapper;
 using NLog;
 using RawRabbit;
 using RawRabbit.vNext;
+using RawRabbit.Configuration;
 using Warden.Common.Commands;
 using Warden.Common.Commands.WardenChecks;
 using Warden.Common.Commands.Wardens;
@@ -44,7 +45,10 @@ namespace Warden.Services.WardenChecks.Framework
                 builder.RegisterType<WardenService>().As<IWardenService>();
                 builder.RegisterType<WardenCheckStorage>().As<IWardenCheckStorage>();
                 builder.RegisterType<WardenCheckService>().As<IWardenCheckService>();
-                builder.RegisterInstance(BusClientFactory.CreateDefault()).As<IBusClient>();
+                var rawRabbitConfiguration = _configuration.GetSettings<RawRabbitConfiguration>();
+                builder.RegisterInstance(rawRabbitConfiguration).SingleInstance();
+                builder.RegisterInstance(BusClientFactory.CreateDefault(rawRabbitConfiguration))
+                    .As<IBusClient>();
                 builder.RegisterType<ProcessWardenCheckResultHandler>()
                     .As<ICommandHandler<ProcessWardenCheckResult>>();
                 builder.RegisterType<OrganizationCreatedHandler>()
