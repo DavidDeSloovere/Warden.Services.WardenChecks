@@ -6,17 +6,15 @@ using RawRabbit;
 using RawRabbit.vNext;
 using RawRabbit.Configuration;
 using Warden.Common.Commands;
-using Warden.Common.Commands.WardenChecks;
-using Warden.Common.Commands.Wardens;
 using Warden.Common.Events;
-using Warden.Common.Events.Organizations;
-using Warden.Common.Events.Wardens;
 using Warden.Common.Extensions;
 using Warden.Common.Mongo;
 using Warden.Common.Nancy;
+using Warden.Services.Organizations.Shared.Events;
 using Warden.Services.WardenChecks.Handlers;
 using Warden.Services.WardenChecks.Repositories;
 using Warden.Services.WardenChecks.Services;
+using Warden.Services.WardenChecks.Shared.Commands;
 
 namespace Warden.Services.WardenChecks.Framework
 {

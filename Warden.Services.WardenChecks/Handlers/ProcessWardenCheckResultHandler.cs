@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using RawRabbit;
 using Warden.Common.Commands;
-using Warden.Common.Commands.WardenChecks;
-using Warden.Common.Events.Wardens;
 using Warden.Services.WardenChecks.Services;
+using Warden.Services.WardenChecks.Shared.Commands;
+using Warden.Services.WardenChecks.Shared.Events;
 
 namespace Warden.Services.WardenChecks.Handlers
 {

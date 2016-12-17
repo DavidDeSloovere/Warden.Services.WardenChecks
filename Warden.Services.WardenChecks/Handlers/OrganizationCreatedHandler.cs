@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Warden.Common.Events;
-using Warden.Common.Events.Organizations;
+using Warden.Services.Organizations.Shared.Events;
 using Warden.Services.WardenChecks.Domain;
 using Warden.Services.WardenChecks.Repositories;
 
