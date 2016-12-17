@@ -1,4 +1,7 @@
-﻿namespace Warden.Services.WardenChecks.Shared.Dto
+﻿using System;
+using System.Collection.Generic;
+
+namespace Warden.Services.WardenChecks.Shared.Dto
 {
     public class WardenIterationDto
     {
@@ -9,6 +12,6 @@
         public DateTime CompletedAt { get; set; }
         public TimeSpan ExecutionTime { get; set; }
         public bool IsValid { get; set; }
-        public IEnumerable<WardenCheckResultDto> Results { get; set; }
+        public IList<WardenCheckResultDto> Results { get; set; }
     }
 }

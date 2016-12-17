@@ -1,4 +1,6 @@
-﻿namespace Warden.Services.WardenChecks.Shared.Dto
+﻿using System;
+
+namespace Warden.Services.WardenChecks.Shared.Dto
 {
     public class WardenCheckResultRootDto
     {

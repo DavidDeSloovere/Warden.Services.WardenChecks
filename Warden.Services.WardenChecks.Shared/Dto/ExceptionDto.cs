@@ -1,4 +1,6 @@
-﻿namespace Warden.Services.WardenChecks.Shared.Dto
+﻿using Newtonsoft.Json;
+
+namespace Warden.Services.WardenChecks.Shared.Dto
 {
     public class ExceptionDto
     {
