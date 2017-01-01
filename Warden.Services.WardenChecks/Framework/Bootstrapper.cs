@@ -17,6 +17,8 @@ using Warden.Services.WardenChecks.Repositories;
 using Warden.Services.WardenChecks.Services;
 using Warden.Services.WardenChecks.Shared.Commands;
 using Newtonsoft.Json;
+using System.Reflection;
+using Warden.Common.Handlers;
 
 namespace Warden.Services.WardenChecks.Framework
 {
@@ -44,18 +46,17 @@ namespace Warden.Services.WardenChecks.Framework
                 builder.RegisterType<WardenCheckResultRootMinifiedRepository>()
                     .As<IWardenCheckResultRootMinifiedRepository>();
                 builder.RegisterType<WardenService>().As<IWardenService>();
+                builder.RegisterType<Handler>().As<IHandler>();
                 builder.RegisterType<WardenCheckStorage>().As<IWardenCheckStorage>();
                 builder.RegisterType<WardenCheckService>().As<IWardenCheckService>();
                 var rawRabbitConfiguration = _configuration.GetSettings<RawRabbitConfiguration>();
                 builder.RegisterInstance(rawRabbitConfiguration).SingleInstance();
                 builder.RegisterInstance(BusClientFactory.CreateDefault(rawRabbitConfiguration))
                     .As<IBusClient>();
-                builder.RegisterType<ProcessWardenCheckResultHandler>()
-                    .As<ICommandHandler<ProcessWardenCheckResult>>();
-                builder.RegisterType<OrganizationCreatedHandler>()
-                    .As<IEventHandler<OrganizationCreated>>();
-                builder.RegisterType<WardenCreatedHandler>()
-                    .As<IEventHandler<WardenCreated>>();
+
+                var assembly = typeof(Startup).GetTypeInfo().Assembly;
+                builder.RegisterAssemblyTypes(assembly).AsClosedTypesOf(typeof(IEventHandler<>));
+                builder.RegisterAssemblyTypes(assembly).AsClosedTypesOf(typeof(ICommandHandler<>));
             });
             LifetimeScope = container;
         }
@@ -70,7 +71,7 @@ namespace Warden.Services.WardenChecks.Framework
                 ctx.Response.Headers.Add("Access-Control-Allow-Origin", "*");
                 ctx.Response.Headers.Add("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
             };
-            Logger.Info("Warden.Services.WardenChecks API Started");
+            Logger.Info("Warden.Services.WardenChecks API has started.");
         }
     }
 }
