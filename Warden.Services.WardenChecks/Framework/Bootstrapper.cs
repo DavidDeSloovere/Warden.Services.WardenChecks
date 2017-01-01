@@ -43,6 +43,7 @@ namespace Warden.Services.WardenChecks.Framework
                 builder.RegisterModule<MongoDbModule>();
                 builder.RegisterType<MongoDbInitializer>().As<IDatabaseInitializer>();
                 builder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>();
+                builder.RegisterType<WardenCheckResultRootRepository>().As<IWardenCheckResultRootRepository>();
                 builder.RegisterType<WardenCheckResultRootMinifiedRepository>()
                     .As<IWardenCheckResultRootMinifiedRepository>();
                 builder.RegisterType<WardenService>().As<IWardenService>();
