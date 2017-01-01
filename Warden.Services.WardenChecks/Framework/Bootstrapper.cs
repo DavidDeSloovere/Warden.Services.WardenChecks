@@ -10,11 +10,13 @@ using Warden.Common.Events;
 using Warden.Common.Extensions;
 using Warden.Common.Mongo;
 using Warden.Common.Nancy;
+using Warden.Common.Nancy.Serialization;
 using Warden.Services.Organizations.Shared.Events;
 using Warden.Services.WardenChecks.Handlers;
 using Warden.Services.WardenChecks.Repositories;
 using Warden.Services.WardenChecks.Services;
 using Warden.Services.WardenChecks.Shared.Commands;
+using Newtonsoft.Json;
 
 namespace Warden.Services.WardenChecks.Framework
 {
@@ -35,6 +37,7 @@ namespace Warden.Services.WardenChecks.Framework
             container.Update(builder =>
             {
                 builder.RegisterInstance(_configuration.GetSettings<MongoDbSettings>());
+                builder.RegisterType<CustomJsonSerializer>().As<JsonSerializer>().SingleInstance();
                 builder.RegisterModule<MongoDbModule>();
                 builder.RegisterType<MongoDbInitializer>().As<IDatabaseInitializer>();
                 builder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>();
