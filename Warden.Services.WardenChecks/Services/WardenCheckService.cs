@@ -8,17 +8,17 @@ namespace Warden.Services.WardenChecks.Services
 {
     public class WardenCheckService : IWardenCheckService
     {
-        public Maybe<WardenCheckResultRoot> ValidateAndParseResult(string userId, 
+        public Maybe<CheckResult> ValidateAndParseResult(string userId, 
             Guid organizationId, Guid wardenId, object checkResult, DateTime createdAt)
         {
             if (checkResult == null)
-                return new Maybe<WardenCheckResultRoot>();
+                return new Maybe<CheckResult>();
 
             var serializedResult = JsonConvert.SerializeObject(checkResult);
             var result = JsonConvert.DeserializeObject<WardenCheckResult>(serializedResult);
             ValidateCheckResult(result);
 
-            return new WardenCheckResultRoot
+            return new CheckResult
             {
                 UserId = userId,
                 Result = result,

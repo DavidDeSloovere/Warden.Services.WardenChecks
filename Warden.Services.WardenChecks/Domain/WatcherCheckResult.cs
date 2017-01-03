@@ -8,9 +8,5 @@ namespace Warden.Services.WardenChecks.Domain
         public string WatcherType { get; set; }
         public string Description { get; set; }
         public bool IsValid { get; set; }
-
-        protected WatcherCheckResult()
-        {
-        }
     }
 }

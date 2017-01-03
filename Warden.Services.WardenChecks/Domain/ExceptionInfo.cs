@@ -6,9 +6,5 @@
         public string Source { get; set; }
         public string StackTrace { get; set; }
         public ExceptionInfo InnerException { get; set; }
-
-        protected ExceptionInfo()
-        {
-        }
     }
 }

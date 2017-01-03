@@ -5,6 +5,6 @@ namespace Warden.Services.WardenChecks.Services
 {
     public interface IWardenCheckStorage
     {
-        Task SaveAsync(WardenCheckResultRoot checkResult);
+        Task SaveAsync(CheckResult checkResult);
     }
 }

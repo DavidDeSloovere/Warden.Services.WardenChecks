@@ -2,8 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Nancy.Bootstrapper;
 using NLog;
-using RawRabbit;
-using RawRabbit.vNext;
 using RawRabbit.Configuration;
 using Warden.Common.Commands;
 using Warden.Common.Events;
@@ -11,14 +9,12 @@ using Warden.Common.Extensions;
 using Warden.Common.Mongo;
 using Warden.Common.Nancy;
 using Warden.Common.Nancy.Serialization;
-using Warden.Services.Organizations.Shared.Events;
-using Warden.Services.WardenChecks.Handlers;
 using Warden.Services.WardenChecks.Repositories;
 using Warden.Services.WardenChecks.Services;
-using Warden.Services.WardenChecks.Shared.Commands;
 using Newtonsoft.Json;
 using System.Reflection;
 using Warden.Common.Handlers;
+using Warden.Common.RabbitMq;
 
 namespace Warden.Services.WardenChecks.Framework
 {
@@ -42,22 +38,18 @@ namespace Warden.Services.WardenChecks.Framework
                 builder.RegisterType<CustomJsonSerializer>().As<JsonSerializer>().SingleInstance();
                 builder.RegisterModule<MongoDbModule>();
                 builder.RegisterType<MongoDbInitializer>().As<IDatabaseInitializer>();
-                builder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>();
-                builder.RegisterType<WardenCheckResultRootRepository>().As<IWardenCheckResultRootRepository>();
-                builder.RegisterType<WardenCheckResultRootMinifiedRepository>()
-                    .As<IWardenCheckResultRootMinifiedRepository>();
-                builder.RegisterType<WardenService>().As<IWardenService>();
                 builder.RegisterType<Handler>().As<IHandler>();
+                builder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>();
+                builder.RegisterType<CheckResultRepository>().As<ICheckResultRepository>();
                 builder.RegisterType<WardenCheckStorage>().As<IWardenCheckStorage>();
                 builder.RegisterType<WardenCheckService>().As<IWardenCheckService>();
-                var rawRabbitConfiguration = _configuration.GetSettings<RawRabbitConfiguration>();
-                builder.RegisterInstance(rawRabbitConfiguration).SingleInstance();
-                builder.RegisterInstance(BusClientFactory.CreateDefault(rawRabbitConfiguration))
-                    .As<IBusClient>();
+                builder.RegisterType<WardenService>().As<IWardenService>();
 
                 var assembly = typeof(Startup).GetTypeInfo().Assembly;
                 builder.RegisterAssemblyTypes(assembly).AsClosedTypesOf(typeof(IEventHandler<>));
                 builder.RegisterAssemblyTypes(assembly).AsClosedTypesOf(typeof(ICommandHandler<>));
+
+                RabbitMqContainer.Register(builder, _configuration.GetSettings<RawRabbitConfiguration>());
             });
             LifetimeScope = container;
         }

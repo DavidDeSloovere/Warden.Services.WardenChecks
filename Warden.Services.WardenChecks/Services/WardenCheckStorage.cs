@@ -6,14 +6,14 @@ namespace Warden.Services.WardenChecks.Services
 {
     public class WardenCheckStorage : IWardenCheckStorage
     {
-        private readonly IWardenCheckResultRootRepository _wardenCheckResultRootRepository;
+        private readonly ICheckResultRepository _checkResultRepository;
 
-        public WardenCheckStorage(IWardenCheckResultRootRepository wardenCheckResultRootRepository)
+        public WardenCheckStorage(ICheckResultRepository checkResultRepository)
         {
-            _wardenCheckResultRootRepository = wardenCheckResultRootRepository;
+            _checkResultRepository = checkResultRepository;
         }
 
-        public async Task SaveAsync(WardenCheckResultRoot checkResult)
-            => await _wardenCheckResultRootRepository.AddAsync(checkResult);
+        public async Task SaveAsync(CheckResult checkResult)
+            => await _checkResultRepository.AddAsync(checkResult);
     }
 }

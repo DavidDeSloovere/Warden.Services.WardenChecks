@@ -6,7 +6,7 @@ namespace Warden.Services.WardenChecks.Services
 {
     public interface IWardenCheckService
     {
-        Maybe<WardenCheckResultRoot> ValidateAndParseResult(string userId,
+        Maybe<CheckResult> ValidateAndParseResult(string userId,
             Guid organizationId, Guid wardenId, object checkResult, DateTime createdAt);
     }
 }

@@ -3,7 +3,7 @@ using Warden.Common.Domain;
 
 namespace Warden.Services.WardenChecks.Domain
 {
-    public class WardenCheckResultRoot : IdentifiableEntity
+    public class CheckResult : IdentifiableEntity
     {
         public string UserId { get; set; }
         public Guid OrganizationId { get; set; }
