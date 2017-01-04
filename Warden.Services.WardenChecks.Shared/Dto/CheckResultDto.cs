@@ -2,7 +2,7 @@
 
 namespace Warden.Services.WardenChecks.Shared.Dto
 {
-    public class WardenCheckResultRootDto
+    public class CheckResultDto
     {
         public Guid Id { get; set; }
         public string UserId { get; set; }

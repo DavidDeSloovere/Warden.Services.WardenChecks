@@ -1,9 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using NLog;
+﻿using System.Threading.Tasks;
 using RawRabbit;
 using Warden.Common.Commands;
+using Warden.Common.Handlers;
+using Warden.Services.WardenChecks.Domain;
 using Warden.Services.WardenChecks.Services;
+using Warden.Services.WardenChecks.Shared;
 using Warden.Services.WardenChecks.Shared.Commands;
 using Warden.Services.WardenChecks.Shared.Events;
 
@@ -11,37 +12,39 @@ namespace Warden.Services.WardenChecks.Handlers
 {
     public class ProcessWardenCheckResultHandler : ICommandHandler<ProcessWardenCheckResult>
     {
-        private readonly static ILogger Logger = LogManager.GetCurrentClassLogger();
+        private readonly IHandler _handler;
         private readonly IBusClient _bus;
         private readonly IWardenCheckService _wardenCheckService;
-        private readonly IWardenCheckStorage _wardenCheckStorage;
 
-        public ProcessWardenCheckResultHandler(IBusClient bus,
-            IWardenCheckService wardenCheckService,
-            IWardenCheckStorage wardenCheckStorage)
+        public ProcessWardenCheckResultHandler(IHandler handler, 
+            IBusClient bus,
+            IWardenCheckService wardenCheckService)
         {
+            _handler = handler;
             _bus = bus;
             _wardenCheckService = wardenCheckService;
-            _wardenCheckStorage = wardenCheckStorage;
         }
 
         public async Task HandleAsync(ProcessWardenCheckResult command)
         {
-            //TODO: Fix createdAt date in command.
-            var createdAt = DateTime.UtcNow;
-            var checkResult = _wardenCheckService.ValidateAndParseResult(command.UserId,
-                command.OrganizationId, command.WardenId, command.Check, createdAt);
-            if (checkResult.HasNoValue)
-            {
-                Logger.Warn($"Warden check result for Warden with id: '{command.WardenId}' is invalid.");
-
-                return;
-            }
-
-            Logger.Info($"Saving check result for Warden with id: '{command.WardenId}'.");
-            await _wardenCheckStorage.SaveAsync(checkResult.Value);
-            await _bus.PublishAsync(new WardenCheckResultProcessed(command.Request.Id, command.UserId,
-                command.OrganizationId, command.WardenId, checkResult.Value.Result, createdAt));
+            CheckResult checkResult = null;
+            await _handler
+                .Run(async () => {
+                    checkResult = _wardenCheckService.ValidateAndParseResult(command.UserId,
+                    command.OrganizationId, command.WardenId, command.Check);
+                    await _wardenCheckService.SaveAsync(checkResult);
+                })
+                .OnSuccess(async () => await _bus.PublishAsync(new WardenCheckResultProcessed(command.Request.Id, 
+                    command.UserId, command.OrganizationId, command.WardenId, checkResult)))
+                .OnCustomError(async ex => await _bus.PublishAsync(new ProcessWardenCheckResultRejected(command.Request.Id,
+                    command.UserId, ex.Code, ex.Message)))
+                .OnError(async (ex, logger) =>
+                {
+                    logger.Error("Error occured while processing Warden check result.");
+                    await _bus.PublishAsync(new ProcessWardenCheckResultRejected(command.Request.Id,
+                        command.UserId, OperationCodes.Error, ex.Message));
+                })
+                .ExecuteAsync();
         }
     }
 }

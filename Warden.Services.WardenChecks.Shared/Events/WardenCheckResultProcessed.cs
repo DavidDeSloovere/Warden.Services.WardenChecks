@@ -10,7 +10,6 @@ namespace Warden.Services.WardenChecks.Shared.Events
         public Guid OrganizationId { get; }
         public Guid WardenId { get; }
         public object Result { get; }
-        public DateTime CreatedAt { get; }
 
         protected WardenCheckResultProcessed()
         {
@@ -20,15 +19,13 @@ namespace Warden.Services.WardenChecks.Shared.Events
             string userId,
             Guid organizationId,
             Guid wardenId,
-            object result,
-            DateTime createdAt)
+            object result)
         {
             RequestId = requestId;
             UserId = userId;
             OrganizationId = organizationId;
             WardenId = wardenId;
             Result = result;
-            CreatedAt = createdAt;
         }
     }
 }

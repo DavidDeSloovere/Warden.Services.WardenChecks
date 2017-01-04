@@ -1,10 +1,10 @@
 ﻿namespace Warden.Services.WardenChecks.Domain
 {
-    public class ExceptionInfo
+    public class Error
     {
         public string Message { get; set; }
         public string Source { get; set; }
         public string StackTrace { get; set; }
-        public ExceptionInfo InnerException { get; set; }
+        public string Level { get; set; }
     }
 }

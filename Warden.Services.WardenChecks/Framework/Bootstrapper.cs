@@ -36,12 +36,12 @@ namespace Warden.Services.WardenChecks.Framework
             {
                 builder.RegisterInstance(_configuration.GetSettings<MongoDbSettings>());
                 builder.RegisterType<CustomJsonSerializer>().As<JsonSerializer>().SingleInstance();
+                builder.RegisterInstance(AutoMapperConfig.InitializeMapper());
                 builder.RegisterModule<MongoDbModule>();
                 builder.RegisterType<MongoDbInitializer>().As<IDatabaseInitializer>();
                 builder.RegisterType<Handler>().As<IHandler>();
                 builder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>();
                 builder.RegisterType<CheckResultRepository>().As<ICheckResultRepository>();
-                builder.RegisterType<WardenCheckStorage>().As<IWardenCheckStorage>();
                 builder.RegisterType<WardenCheckService>().As<IWardenCheckService>();
                 builder.RegisterType<WardenService>().As<IWardenService>();
 

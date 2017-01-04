@@ -1,7 +1,10 @@
 using System.Threading.Tasks;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+using Warden.Common.Mongo;
+using Warden.Common.Types;
 using Warden.Services.WardenChecks.Domain;
-using Warden.Services.WardenChecks.Repositories.Queries;
+using Warden.Services.WardenChecks.Queries;
 
 namespace Warden.Services.WardenChecks.Repositories
 {
@@ -15,6 +18,17 @@ namespace Warden.Services.WardenChecks.Repositories
         }
 
         public async Task AddAsync(CheckResult checkResult)
-            => await _database.CheckResults().InsertOneAsync(checkResult);
+            => await Collection.InsertOneAsync(checkResult);
+
+        public async Task<Maybe<PagedResult<CheckResult>>> BrowseAsync(BrowseCheckResults query)
+        {
+            var values = Collection.AsQueryable();
+
+            values = values.OrderBy(x => x.CreatedAt);
+
+            return await values.PaginateAsync(query);
+        }
+
+        private IMongoCollection<CheckResult> Collection => _database.GetCollection<CheckResult>();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Warden.Services.WardenChecks.Shared.Dto
 {
-    public class ExceptionDto
+    public class ErrorDto
     {
         public string Message { get; set; }
         public string Source { get; set; }
@@ -10,6 +10,6 @@ namespace Warden.Services.WardenChecks.Shared.Dto
         [JsonProperty("StackTraceString")]
         public string StackTrace { get; set; }
 
-        public ExceptionDto InnerException { get; set; }
+        public string Level { get; set; }
     }
 }

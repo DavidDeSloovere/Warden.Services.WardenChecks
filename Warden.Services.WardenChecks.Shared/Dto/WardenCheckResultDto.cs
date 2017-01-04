@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Warden.Services.WardenChecks.Shared.Dto
 {
@@ -9,6 +10,6 @@ namespace Warden.Services.WardenChecks.Shared.Dto
         public DateTime StartedAt { get; set; }
         public DateTime CompletedAt { get; set; }
         public TimeSpan ExecutionTime { get; set; }
-        public ExceptionDto Exception { get; set; }
+        public IList<ErrorDto> Errors { get; set; }
     }
 }
