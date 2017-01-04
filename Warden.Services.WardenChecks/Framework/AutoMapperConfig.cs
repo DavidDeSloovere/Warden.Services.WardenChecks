@@ -12,7 +12,7 @@ namespace Warden.Services.WardenChecks.Framework
             {
                 cfg.CreateMap<CheckResult, CheckResultDto>();
                 cfg.CreateMap<WardenCheckResult, WardenCheckResultDto>();
-                cfg.CreateMap<WatcherCheckResult, WardenCheckResultDto>();
+                cfg.CreateMap<WatcherCheckResult, WatcherCheckResultDto>();
                 cfg.CreateMap<Error, ErrorDto>();
             });
 
