@@ -37,7 +37,7 @@ namespace Warden.Services.WardenChecks.Services
             return new CheckResult
             {
                 UserId = userId,
-                Result = result,
+                Result = checkResult,
                 WardenId = wardenId,
                 OrganizationId = organizationId,
                 CreatedAt = DateTime.UtcNow

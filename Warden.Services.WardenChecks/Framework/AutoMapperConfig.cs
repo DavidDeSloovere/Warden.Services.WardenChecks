@@ -11,6 +11,7 @@ namespace Warden.Services.WardenChecks.Framework
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<CheckResult, CheckResultDto>();
+                cfg.CreateMap<object, WardenCheckResultDto>();
                 cfg.CreateMap<WardenCheckResult, WardenCheckResultDto>();
                 cfg.CreateMap<WatcherCheckResult, WatcherCheckResultDto>();
                 cfg.CreateMap<Error, ErrorDto>();

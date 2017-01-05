@@ -9,6 +9,6 @@ namespace Warden.Services.WardenChecks.Shared.Dto
         public Guid OrganizationId { get; set; }
         public Guid WardenId { get; set; }
         public DateTime CreatedAt { get; set; }
-        public WardenCheckResultDto Result { get; set; }
+        public object Result { get; set; }
     }
 }
