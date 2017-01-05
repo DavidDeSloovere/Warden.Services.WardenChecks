@@ -32,7 +32,6 @@ namespace Warden.Services.WardenChecks.Services
 
             var serializedResult = JsonConvert.SerializeObject(checkResult);
             var result = JsonConvert.DeserializeObject<WardenCheckResult>(serializedResult);
-            result.ExecutionTimeTicks = (result.CompletedAt - result.StartedAt).Ticks;
             ValidateCheckResult(result);
             result.WatcherCheckResult.WatcherFullType = result.WatcherCheckResult.WatcherType;
             if (result.WatcherCheckResult.WatcherType.Contains(","))

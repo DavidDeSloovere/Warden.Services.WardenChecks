@@ -12,7 +12,7 @@ namespace Warden.Services.WardenChecks.Domain
         public WatcherCheckResult WatcherCheckResult { get; set; }
         public DateTime StartedAt { get; set; }
         public DateTime CompletedAt { get; set; }
-        public long ExecutionTimeTicks { get; set; }
+        public TimeSpan ExecutionTime { get; set; }
 
         public IEnumerable<Error> Errors
         {
