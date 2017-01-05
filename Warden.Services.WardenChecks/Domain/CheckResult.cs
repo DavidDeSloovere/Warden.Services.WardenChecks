@@ -9,6 +9,7 @@ namespace Warden.Services.WardenChecks.Domain
         public Guid OrganizationId { get; set; }
         public Guid WardenId { get; set; }
         public DateTime CreatedAt { get; set; }
-        public object Result { get; set; }
+        public WardenCheckResult Result { get; set; }
+        public string Data { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using Warden.Services.WardenChecks.Repositories;
 using System.Threading.Tasks;
 using Warden.Common.Types;
 using Warden.Services.WardenChecks.Queries;
+using System.Linq;
 
 namespace Warden.Services.WardenChecks.Services
 {
@@ -31,13 +32,21 @@ namespace Warden.Services.WardenChecks.Services
 
             var serializedResult = JsonConvert.SerializeObject(checkResult);
             var result = JsonConvert.DeserializeObject<WardenCheckResult>(serializedResult);
-            result.ExecutionTime = result.StartedAt - result.CompletedAt;
+            result.ExecutionTimeTicks = (result.CompletedAt - result.StartedAt).Ticks;
             ValidateCheckResult(result);
+            result.WatcherCheckResult.WatcherFullType = result.WatcherCheckResult.WatcherType;
+            if (result.WatcherCheckResult.WatcherType.Contains(","))
+            {
+                result.WatcherCheckResult.WatcherType = result.WatcherCheckResult.WatcherType
+                    .Split(',').First()
+                    .Split('.').LastOrDefault();
+            }
 
             return new CheckResult
             {
                 UserId = userId,
-                Result = checkResult,
+                Result = result,
+                Data = serializedResult,
                 WardenId = wardenId,
                 OrganizationId = organizationId,
                 CreatedAt = DateTime.UtcNow

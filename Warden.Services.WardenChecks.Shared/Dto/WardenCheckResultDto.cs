@@ -9,7 +9,7 @@ namespace Warden.Services.WardenChecks.Shared.Dto
         public WatcherCheckResultDto WatcherCheckResult { get; set; }
         public DateTime StartedAt { get; set; }
         public DateTime CompletedAt { get; set; }
-        public TimeSpan ExecutionTime { get; set; }
+        public long ExecutionTimeTicks { get; set; }
         public IList<ErrorDto> Errors { get; set; }
     }
 }
