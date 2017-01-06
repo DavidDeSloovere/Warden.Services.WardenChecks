@@ -10,5 +10,6 @@ namespace Warden.Services.WardenChecks.Domain
         public string WatcherFullType { get; set; }
         public string Description { get; set; }
         public bool IsValid { get; set; }
+        public object Data { get; set; }
     }
 }

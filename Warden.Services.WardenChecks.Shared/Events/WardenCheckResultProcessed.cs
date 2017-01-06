@@ -1,5 +1,6 @@
 ﻿using System;
 using Warden.Common.Events;
+using Warden.Services.WardenChecks.Shared.Dto;
 
 namespace Warden.Services.WardenChecks.Shared.Events
 {
@@ -9,7 +10,7 @@ namespace Warden.Services.WardenChecks.Shared.Events
         public string UserId { get; }
         public Guid OrganizationId { get; }
         public Guid WardenId { get; }
-        public object Result { get; }
+        public CheckResultDto CheckResult { get; }
 
         protected WardenCheckResultProcessed()
         {
@@ -19,13 +20,13 @@ namespace Warden.Services.WardenChecks.Shared.Events
             string userId,
             Guid organizationId,
             Guid wardenId,
-            object result)
+            CheckResultDto checkResult)
         {
             RequestId = requestId;
             UserId = userId;
             OrganizationId = organizationId;
             WardenId = wardenId;
-            Result = result;
+            CheckResult = checkResult;
         }
     }
 }

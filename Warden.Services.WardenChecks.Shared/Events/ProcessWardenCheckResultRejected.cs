@@ -10,7 +10,6 @@ namespace Warden.Services.WardenChecks.Shared.Events
         public string Code { get; }
         public string Reason { get; }
 
-
         protected ProcessWardenCheckResultRejected()
         {
         }

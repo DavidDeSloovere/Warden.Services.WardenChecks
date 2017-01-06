@@ -26,8 +26,8 @@ namespace Warden.Services.WardenChecks.Services
         {
             if (checkResult == null)
             {
-                throw new ServiceException(OperationCodes.EmptyWatcherCheckResult,
-                    "Watcher check result can not be null.");
+                throw new ServiceException(OperationCodes.EmptyWardenCheckResult,
+                    "Warden check result can not be null.");
             }
 
             var serializedResult = JsonConvert.SerializeObject(checkResult);
@@ -38,14 +38,14 @@ namespace Warden.Services.WardenChecks.Services
             {
                 result.WatcherCheckResult.WatcherType = result.WatcherCheckResult.WatcherType
                     .Split(',').First()
-                    .Split('.').LastOrDefault();
+                    .Split('.').LastOrDefault()
+                    ?.TrimToLower()?.Replace("watcher", string.Empty);
             }
 
             return new CheckResult
             {
                 UserId = userId,
                 Result = result,
-                Data = serializedResult,
                 WardenId = wardenId,
                 OrganizationId = organizationId,
                 CreatedAt = DateTime.UtcNow

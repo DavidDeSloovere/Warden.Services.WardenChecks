@@ -10,6 +10,5 @@ namespace Warden.Services.WardenChecks.Domain
         public Guid WardenId { get; set; }
         public DateTime CreatedAt { get; set; }
         public WardenCheckResult Result { get; set; }
-        public string Data { get; set; }
     }
 }

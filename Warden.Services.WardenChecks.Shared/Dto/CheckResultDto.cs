@@ -10,6 +10,5 @@ namespace Warden.Services.WardenChecks.Shared.Dto
         public Guid WardenId { get; set; }
         public DateTime CreatedAt { get; set; }
         public WardenCheckResultDto Result { get; set; }
-        public string Data { get; set; }
     }
 }
