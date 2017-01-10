@@ -4,7 +4,7 @@
     {
         public HomeModule()
         {
-            Get("", args => "Welcome to the Warden.Services.Storage API!");
+            Get("", args => "Welcome to the Warden.Services.WardenChecks API!");
         }
     }
 }
