@@ -17,7 +17,7 @@ namespace Warden.Services.WardenChecks.Modules
         { 
             if (requireAuthentication)
             {
-                // this.RequiresAuthentication();
+                this.RequiresAuthentication();
             }
         }
     }
