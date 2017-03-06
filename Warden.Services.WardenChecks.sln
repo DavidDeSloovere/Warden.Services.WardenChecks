@@ -9,8 +9,6 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Warden.Services.WardenCheck
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Warden.Services.WardenChecks.Tests.EndToEnd", "Warden.Services.WardenChecks.Tests.EndToEnd\Warden.Services.WardenChecks.Tests.EndToEnd.xproj", "{039AA86D-6358-4458-A9AD-C53C997403E9}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Warden.Services.WardenChecks.Shared", "Warden.Services.WardenChecks.Shared\Warden.Services.WardenChecks.Shared.xproj", "{89C7329A-17A6-490F-92D4-9F68A382E9E3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{039AA86D-6358-4458-A9AD-C53C997403E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{039AA86D-6358-4458-A9AD-C53C997403E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{039AA86D-6358-4458-A9AD-C53C997403E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{89C7329A-17A6-490F-92D4-9F68A382E9E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{89C7329A-17A6-490F-92D4-9F68A382E9E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{89C7329A-17A6-490F-92D4-9F68A382E9E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{89C7329A-17A6-490F-92D4-9F68A382E9E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,10 +1,12 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
+using Nancy;
 using Nancy.Bootstrapper;
+using Nancy.Bootstrappers.Autofac;
 using NLog;
 using RawRabbit.Configuration;
-using Warden.Common.Commands;
-using Warden.Common.Events;
+using Warden.Messages.Commands;
+using Warden.Messages.Events;
 using Warden.Common.Extensions;
 using Warden.Common.Mongo;
 using Warden.Common.Nancy;
@@ -16,7 +18,6 @@ using System.Reflection;
 using Warden.Common.Handlers;
 using Warden.Common.RabbitMq;
 using Warden.Common.Security;
-using Nancy;
 using Warden.Common.Exceptionless;
 
 namespace Warden.Services.WardenChecks.Framework

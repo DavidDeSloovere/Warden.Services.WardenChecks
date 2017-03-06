@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Warden.Services.WardenChecks.Shared.Dto
+namespace Warden.Services.WardenChecks.Dto
 {
     public class ErrorDto
     {

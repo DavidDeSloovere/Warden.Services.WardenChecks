@@ -1,4 +1,4 @@
-﻿namespace Warden.Services.WardenChecks.Shared
+﻿namespace Warden.Services.WardenChecks
 {
     public static class OperationCodes
     {

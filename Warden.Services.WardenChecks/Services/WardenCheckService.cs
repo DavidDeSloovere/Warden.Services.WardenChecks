@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Warden.Services.WardenChecks.Domain;
 using Warden.Common.Extensions;
 using Warden.Common.Exceptions;
-using Warden.Services.WardenChecks.Shared;
+using Warden.Services.WardenChecks;
 using Warden.Services.WardenChecks.Repositories;
 using System.Threading.Tasks;
 using Warden.Common.Types;

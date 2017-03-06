@@ -1,7 +1,7 @@
 ﻿using Warden.Common.Host;
-using Warden.Services.Organizations.Shared.Events;
+using Warden.Messages.Events.Organizations;
 using Warden.Services.WardenChecks.Framework;
-using Warden.Services.WardenChecks.Shared.Commands;
+using Warden.Messages.Commands.WardenChecks;
 
 namespace Warden.Services.WardenChecks
 {

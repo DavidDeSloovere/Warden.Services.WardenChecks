@@ -1,14 +1,13 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
 using RawRabbit;
-using Warden.Common.Commands;
+using Warden.Messages.Commands;
 using Warden.Common.Handlers;
 using Warden.Services.WardenChecks.Domain;
 using Warden.Services.WardenChecks.Services;
-using Warden.Services.WardenChecks.Shared;
-using Warden.Services.WardenChecks.Shared.Commands;
-using Warden.Services.WardenChecks.Shared.Dto;
-using Warden.Services.WardenChecks.Shared.Events;
+using Warden.Messages.Commands.WardenChecks;
+using Warden.Services.WardenChecks.Dto;
+using Warden.Messages.Events.WardenChecks;
 
 namespace Warden.Services.WardenChecks.Handlers
 {
